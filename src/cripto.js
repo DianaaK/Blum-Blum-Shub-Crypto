@@ -1,6 +1,7 @@
 //functie care cripteaza conform cifrului cezar.
-export const caesarCipher = function (content, key) {
+export const caesarCipher = function (text, key) {
   let output = "";
+  const content = text.replace(/ /g, "").toUpperCase();
   for (let i = 0; i < content.length; i++) {
     //se parcurge textul de criptat/decriptat
     let c = content[i];
@@ -47,17 +48,17 @@ const tableGenerator = (key) => {
 
 export const bifidEncode = (content, key) => {
   const table = tableGenerator(key);
-  const rawText = content.replace(/ /g, ""); //se elimina spatiile
+  let rawText = content.replace(/ /g, ""); //se elimina spatiile
+  rawText = rawText.replace(/J/g, "I"); //se inlocuieste j cu i (in patrat vor avea acelasi cod)
   let rawIndices = "";
   for (let i = 0; i < rawText.length; i++) {
-    let character = rawText.charAt(i).toUpperCase();
+    let character = rawText.charAt(i);
     rawIndices += table[character];
   } //se cauta in tabel si se inlocuiesc literele cu codul respectiv
   let cipherIndices = "";
   for (let i = 0; i < rawIndices.length; i += 2) {
     cipherIndices += rawIndices.charAt(i);
   } //se adauga primul "rand"
-  console.log(cipherIndices);
   for (let i = 1; i < rawIndices.length; i += 2) {
     cipherIndices += rawIndices.charAt(i);
   } //se adauga al doilea "rand"
@@ -70,11 +71,12 @@ export const bifidEncode = (content, key) => {
 };
 
 export const bifidDecode = (content, key) => {
-  const cipherText = content.replace(/ /g, ""); //se elimina spatiile
+  let cipherText = content.replace(/ /g, "").toUpperCase(); //se elimina spatiile
+  cipherText = content.replace(/J/g, "I"); //se inlocuieste j cu i (in patrat vor avea acelasi cod)
   let cipherIndices = "";
   const table = tableGenerator(key);
   for (let i = 0; i < cipherText.length; i++) {
-    let character = cipherText.charAt(i).toUpperCase();
+    let character = cipherText.charAt(i);
     cipherIndices += table[character];
   } //se cauta in tabel si se inlocuiesc literele cu codul respectiv
   let rawIndices = "";
