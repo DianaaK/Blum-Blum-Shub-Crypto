@@ -1,4 +1,4 @@
-**Codul se gaseste in src/Card.js iar algoritmii pentru criptare/decriptare sunt in cripto.js**
+**Interfata, validarile si citirea/scrierea in fisier se gasesc in src/Card.js, iar algoritmii pentru criptare/decriptare sunt in cripto.js**
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
