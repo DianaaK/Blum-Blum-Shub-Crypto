@@ -1,3 +1,5 @@
+**Codul se gaseste in src/Card.js iar algoritmii pentru criptare/decriptare sunt in cripto.js**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
