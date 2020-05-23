@@ -1,5 +1,8 @@
 **Interfata, validarile si citirea/scrierea in fisier se gasesc in src/components/Card.js, iar algoritmii pentru criptare/decriptare sunt in src/cripto.js**
 
+**Demo:**
+https://drive.google.com/file/d/1odRZ9__ZKDdxYcR5Jm5PoSLcGOTI9bdA/view?usp=sharing
+
 
 ## Available Scripts
 
