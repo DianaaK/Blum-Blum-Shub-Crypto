@@ -15,7 +15,7 @@ class Card extends React.Component {
     if (!isNaN(this.state.size) && this.state.size > 0) {
       //verifica daca dimensiunea este un numar > 0
       for (let size = 0; size < this.state.size * 1024 * 1000; size++) {
-        result += next(); //gereaza cate un bit
+        result += next(); //genereaza cate un bit
         console.log(size, this.state.size * 1024 * 1000);
       }
       console.log(result);

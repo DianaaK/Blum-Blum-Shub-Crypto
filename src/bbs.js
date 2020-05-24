@@ -15,10 +15,10 @@ const cmmdc = (a, b) => {
   return a;
 };
 
-// reziduu patratic modulo n. trebuie sa fie diferit de 0, 1, si sa nu ii aiba ca factori pe q sau p
+// reziduu patratic modulo n. trebuie sa fie diferit de 0, 1, si sa fie prim cu intregul Blum (aka nu ii are factori pe q si p)
 const generate = (s) => {
   if (s !== 0 && s !== 1 && cmmdc(s, nr) === 1) {
-    //verifica ca numarul sa indeplineasca conditiile
+    // verifica ca numarul sa indeplineasca conditiile
     x = s;
     return s;
   }
@@ -27,7 +27,7 @@ const generate = (s) => {
 // genereaza urmatorul numar din secventa
 export const next = () => {
   generate(x);
-  x = (x * x) % nr; //numarul generat
+  x = (x * x) % nr; // numarul generat
   let b = x % 2; // bitul din secventa corespunzator
   return b;
 };
