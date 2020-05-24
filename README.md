@@ -1,7 +1,7 @@
-**Interfata, validarile si citirea/scrierea in fisier se gasesc in src/components/Card.js, iar algoritmii pentru criptare/decriptare sunt in src/bbs.js**
+**Interfata si generarea fisierului se gasesc in src/components/Card.js, iar algoritmiul Blum Blum Shub este in src/bbs.js**
 
 **Demo:**
-https://drive.google.com/file/d/1qKD-bxpZ-FysgS6KcWgITNNmyiFBjYoR/view?usp=sharing
+https://drive.google.com/file/d/12EU9PlqB0dML5k5JVL6iNHXUn2RpNCjg/view?usp=sharing
 
 ## Available Scripts
 
