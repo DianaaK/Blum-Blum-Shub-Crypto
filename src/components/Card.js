@@ -73,6 +73,7 @@ class Card extends React.Component {
     element.click();
   };
 
+  //interfata
   render() {
     return (
       <div className="mainCard">

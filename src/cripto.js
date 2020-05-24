@@ -1,24 +1,21 @@
-//functie care cripteaza conform cifrului cezar.
+//functie care cripteaza conform cifrului caesar.
 export const caesarCipher = function (text, key) {
   let output = "";
-  const content = text.replace(/ /g, "").toUpperCase();
+  const content = text.replace(/ /g, "").toUpperCase(); //se elimina spatiile, se transforma literele in majuscule
   for (let i = 0; i < content.length; i++) {
     //se parcurge textul de criptat/decriptat
     let c = content[i];
     if (c.match(/[a-z]/i)) {
       //daca caracterul este o litera, se aplica cheia
-      let code = content.charCodeAt(i);
-      if (code >= 65 && code <= 90)
-        c = String.fromCharCode(((code - 65 + key) % 26) + 65);
-      else if (code >= 97 && code <= 122)
-        c = String.fromCharCode(((code - 97 + key) % 26) + 97);
+      let code = content.charCodeAt(i); //se ia codul ASCII al literei (e majuscula, deci A=65, Z=90)
+      c = String.fromCharCode(((code - 65 + key) % 26) + 65);
     }
     output += c;
   }
   return output;
 };
 
-//functie de generare a patratului polybius, rezultatul este un obiect avand atat cheia - litera si valoarea - numarul liniei+coloanei, cat si invers ( pentru a gasi mai usor valorile )
+//functie de generare a patratului polybius, rezultatul este un obiect avand atat cheia = litera si valoarea = numarul liniei+coloanei, cat si invers ( pentru a gasi mai usor valorile )
 const tableGenerator = (key) => {
   let result = {};
   let unique = 0;
@@ -36,7 +33,7 @@ const tableGenerator = (key) => {
   for (let i = 0; i < chars.length; i++) {
     let c = chars.charAt(i);
     if (!(c in result)) {
-      // daca se gasesc deja in tabel, se trece mai departe
+      // daca litera e deja in tabel, se trece mai departe
       let index = Math.floor(unique / 5).toString() + (unique % 5).toString();
       result[c] = index;
       result[index] = c;
@@ -48,8 +45,8 @@ const tableGenerator = (key) => {
 
 export const bifidEncode = (content, key) => {
   const table = tableGenerator(key);
-  let rawText = content.replace(/ /g, ""); //se elimina spatiile
-  rawText = rawText.replace(/J/g, "I"); //se inlocuieste j cu i (in patrat vor avea acelasi cod)
+  // let rawText = content.replace(/ /g, ""); //se elimina spatiile
+  let rawText = content.replace(/J/g, "I"); //se inlocuieste j cu i (in patrat vor avea acelasi cod)
   let rawIndices = "";
   for (let i = 0; i < rawText.length; i++) {
     let character = rawText.charAt(i);
@@ -58,11 +55,10 @@ export const bifidEncode = (content, key) => {
   let cipherIndices = "";
   for (let i = 0; i < rawIndices.length; i += 2) {
     cipherIndices += rawIndices.charAt(i);
-  } //se adauga primul "rand"
+  } //se adauga primul "rand" - prima cifra din codul fiecarei litere
   for (let i = 1; i < rawIndices.length; i += 2) {
     cipherIndices += rawIndices.charAt(i);
-  } //se adauga al doilea "rand"
-  console.log(cipherIndices);
+  } //se adauga al doilea "rand" - a2a cifra din codul fiecarei litere
   let cipherText = "";
   for (let i = 0; i < cipherIndices.length; i += 2) {
     cipherText += table[cipherIndices.substr(i, 2)];
@@ -71,7 +67,7 @@ export const bifidEncode = (content, key) => {
 };
 
 export const bifidDecode = (content, key) => {
-  let cipherText = content.replace(/ /g, "").toUpperCase(); //se elimina spatiile
+  let cipherText = content.replace(/ /g, "").toUpperCase(); //se elimina spatiile, se transforma literele in majuscule
   cipherText = content.replace(/J/g, "I"); //se inlocuieste j cu i (in patrat vor avea acelasi cod)
   let cipherIndices = "";
   const table = tableGenerator(key);
@@ -83,7 +79,7 @@ export const bifidDecode = (content, key) => {
   for (let i = 0; i < cipherText.length; i++) {
     rawIndices += cipherIndices[i];
     rawIndices += cipherIndices[i + cipherText.length];
-  } //se iau din sirul de numere codurile respective literelor (pentru prima litera - prima cifra si cifra de pe pozitia jumatate+1) si se scriu ordonat
+  } //se imparte sirul in 2. se iau codurile de pe pozitiile i si i+jumatate si se scriu ordonat (pentru prima litera - pozitia 1 si pozitia jumatate+1)
   let rawText = "";
   for (let i = 0; i < rawIndices.length; i += 2) {
     rawText += table[rawIndices.substr(i, 2)];
